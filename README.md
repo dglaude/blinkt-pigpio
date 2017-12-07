@@ -1,30 +1,33 @@
 # blinkt-pigpio
 Blinkt! library that use pigpio rather than RPi.GPIO
 
-This is a quick and dirty adaptation of the Blinkt! library from Pimoroni
-https://github.com/pimoroni/blinkt
+*Initial version*
+It was a quick and dirty adaptation of the Blinkt! library from Pimoroni https://github.com/pimoroni/blinkt
+Most copyright goes to Pimoroni that released under MIT.
 
-Most copyright goes to them (only a few minor change from David Glaude).
-Replaced line of code have a ### in front.
+Rather than to use RPi.GPIO to drive GPIO of the local Pi, it use pigpio to do the same thing, but bit banging on remote GPIO is not optimal.
 
-It is a single file 'blinkt.py' that you can put next to a working Blinkt! example.
+That version is still available as blinkt_bitbang.py but should be avoided.
 
-Rather than to use RPi.GPIO to drive GPIO of the local Pi...
-It use pigpio to do the same thing.
-You can find pigpio here: http://abyz.me.uk/rpi/pigpio/index.html
-In particular the Python API: http://abyz.me.uk/rpi/pigpio/python.html
+*Second version*
+Thi use the wave function from pigpio.
+It is based on the Pyhon APA102 example code found here:
+http://abyz.me.uk/rpi/pigpio/examples.html#Python code
 
-Currently this is the worst possible implementation that use GPIO bit banging.
+Copyright goes to Pimoroni for the Blinkt! API and base code.
+And pigpio exemple is Public Domain
+# APA102 LED strip driver
+# 2017-03-28
 
-Search APA102 example on this page: http://abyz.me.uk/rpi/pigpio/examples.html#Python code
+This version is a single file 'blinkt.py' to put next to a Blinkt! example.
 
-APA102 LED strip driver
-2017-03-28
-Script to drive an APA102 LED strip. Three different methods are demonstrated - using spidev SPI (only works on the local Pi), pigpio SPI, and pigpio waves. The SPI solutions only work with the dedicated SPI GPIO. Waves may use any spare GPIO. Four different examples are given including a LED strip clock.
+You can find more information about pigpio here: http://abyz.me.uk/rpi/pigpio/index.html
 
-However pigpio also work over the network if you set properly the environmental variable.
+Basically, you need to have pigpiod running on the Pi where you have the Blinkt! attached. Then you need to configure the proper environment variable to tell wich IP to use to communicate with that Pi from where you run the Blink! example.
 
-This become particularly interesting if you use a PiZero and remote GPIO pin as with the usbbootgui from Raspbian Desktop (x86).
+export PIGPIO_ADDR=10.0.99.1
+
+This become particularly interesting if you use a PiZero and remote GPIO pin as with the usbbootgui from Raspbian Desktop (x86) or with Pirate Python.
 
 You can acquire the Blinkt! from here: https://shop.pimoroni.com/products/blinkt
 
